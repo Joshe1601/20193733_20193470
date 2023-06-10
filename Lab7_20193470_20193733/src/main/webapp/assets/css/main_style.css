@@ -17,7 +17,7 @@ nav a{
 
 .company-logo--vertical-separator {
     width: 1px;
-    height: 43px;
+    height: 55px;
     display: block;
     background-color: #d8d8d8;
 }
@@ -29,8 +29,12 @@ nav a{
 }
 
 
+.header-logo--company a img {
+    margin-right: 10px;
+    border-radius: 18px
+}
+
 .header-logo--company img {
-    height: 50px;
     margin-right: 10px;
 }
 
@@ -62,7 +66,7 @@ nav a{
 .header-area .main-nav ul.nav {
     border-radius: 0px 0px 25px 25px;
     flex-basis: 100%;
-    margin-top: 10px;
+    margin-top: 5px;
     justify-content: right;
     -webkit-transition: all 0.3s ease 0s;
     -moz-transition: all 0.3s ease 0s;
@@ -89,7 +93,7 @@ nav a{
     padding-right: 20px;
     border-radius: 20px;
     font-weight: 300;
-    font-size: 15px;
+    font-size: 16px;
     height: 40px;
     line-height: 40px;
     text-transform: capitalize;
@@ -133,4 +137,33 @@ nav a{
 
 * {
     box-sizing: border-box;
+}
+
+#infinite {
+    background-color: #222;
+    background-image: url(../images/conmebol_eliminatorias.jpg);
+    background-repeat: no-repeat;
+    background-size: cover; /* La imagen se ajusta para cubrir toda la sección */
+    background-position: center; /* La imagen se posiciona en el centro */
+    height: 76vh;
+    min-height: 375px;
+    position: relative;
+}
+
+#infinite .tm-hero-text-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+#infinite .tm-hero-title {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+#infinite .tm-hero-subtitle {
+    font-size: 24px;
 }

@@ -20,13 +20,13 @@
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <ul class="header-logo--company">
-                        <li><a href="index.html"><img src="<%=request.getContextPath()%>/assets/images/fifalogo.jpg" alt="logo" class = logo-imagen></a>
+                        <li><a href="index.html"><img src="<%=request.getContextPath()%>/assets/images/logo-FIFA.png" alt="logo" class = logo-imagen style="width: 75px"></a>
                         </li>
                         <li>
                             <span class="company-logo--vertical-separator"></span>
                         </li>
                         <li>
-                            <img src="<%=request.getContextPath()%>/assets/images/conmebol_logo.jpg" alt="logo" class="logo-imagen">
+                            <img src="<%=request.getContextPath()%>/assets/images/conmebol_logo_1.png" alt="logo" class="logo-imagen" style="width: 60px">
 
                         </li>
                     </ul>
