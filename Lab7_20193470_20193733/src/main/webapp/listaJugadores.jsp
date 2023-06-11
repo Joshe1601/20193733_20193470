@@ -16,28 +16,25 @@
     </jsp:include>
 
 
-    <div class="pb-5 pt-4 px-3 titlecolor">
-
+    <div class="pt-4">
         <div class="row">
-            <div class="col-lg-6">
-                <h1 class='text-light'>Lista de Canciones por banda</h1>
-            </div>
-            <div class="col-lg-6 text-right" >
-                <a id="ocultar" class="btn btn-warning" href="<%=request.getContextPath()%>/listaJugadores?action=agregar">Agregar nuevo jugador</a>
+            <div class="col-lg-12 d-flex justify-content-end" >
+                <a id="ocultar" class="btn btn-warning" href="<%=request.getContextPath()%>/mainservlet?action=agregar">Agregar nuevo jugador</a>
             </div>
         </div>
-
     </div>
 
     <div class="tabla">
         <table class="table table-dark table-transparent table-hover">
             <thead>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Edad</th>
-            <th>Posición</th>
-            <th>Club</th>
-            <th>Nombre de selección</th>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Posición</th>
+                <th>Club</th>
+                <th>Nombre de selección</th>
+            </tr>
             </thead>
 
             <%
@@ -64,7 +61,6 @@
             </tr>
         </table>
     </div>
-    <br>
     <jsp:include page="/static/footer.jsp"/>
 </div>
 </body>
