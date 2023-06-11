@@ -5,16 +5,41 @@
   Time: 23:20
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="java.util.ArrayList" %>
-<% ArrayList<Seleccion> listaSelecciones = (ArrayList<Seleccion>) request.getAttribute("listaSelecciones"); %>
+<jsp:useBean type="java.util.ArrayList<Beans.Seleccion>" scope="request" id="listaSelecciones"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-    <head>
-        <title>Lista de Selecciones</title>
-    </head>
-    <body>
-        <h1>Lista de Selecciones</h1>
-        <table>
+<<html>
+<jsp:include page="/static/head.jsp"/>
+<body>
+<div class="bgr-body">
+    <!-- ***** Header Area Start ***** -->
+    <jsp:include page="/includes/navbar.jsp">
+        <jsp:param name="page" value="selecciones"/>
+    </jsp:include>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Background Area Start ***** -->
+    <section id="infinite">
+        <div class="img-container">
+            <h2 class="img-title">Clasificatorias Sudamericanas Mundial 2026</h2>
+            <p class="img-subtitle">
+                Lista de selecciones disponibles:
+            </p>
+        </div>
+    </section>
+    <!-- ***** Background Area End ***** -->
+
+
+    <div class="pt-4">
+        <div class="row">
+            <div class="col-lg-12 d-flex justify-content-end" >
+                <a id="ocultar" class="btn btn-warning" href="<%=request.getContextPath()%>/SeleccionServlet?action=agregar">Agregar nueva selección</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabla">
+        <table class="table table-dark table-transparent table-hover">
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre de selección</th>
@@ -22,6 +47,8 @@
                 <th>Estadio</th>
                 <th>Primer Partido</th>
             </tr>
+            </thead>
+
             <%for (Seleccion seleccion : listaSelecciones) { %>
             <tr>
                 <td><%= seleccion.getIdSeleccion() %></td>
@@ -39,5 +66,9 @@
             %>
             <a href="<%= request.getContextPath()%>/SeleccionServlet?l=agregar" class="btn btn-primary mb-4">Agregar nueva selección</a>
         </table>
+
+
+    <jsp:include page="/static/footer.jsp"/>
+</div>
     </body>
 </html>
