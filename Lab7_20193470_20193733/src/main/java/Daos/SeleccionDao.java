@@ -2,19 +2,19 @@ package Daos;
 
 import Beans.Estadio;
 import Beans.Seleccion;
-
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class SeleccionDao {
+public class SeleccionDao extends BaseDao{
     public ArrayList<Seleccion> listarSelecciones() {
         ArrayList<Seleccion> listaSelecciones = new ArrayList<>();
 
-        try (Connection conn = this.getConection();
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT idSeleccion, nombre, tecnico, estadio, fecha, primer_partido" +
+             ResultSet rs = stmt.executeQuery("SELECT *" +
                      "FROM (" +
                      "    SELECT s.idSeleccion, s.nombre, s.tecnico, e.nombre AS estadio, MIN(p.fecha) AS fecha," +
                      "           CONCAT(sl.nombre, ' vs ', sv.nombre) AS primer_partido," +
@@ -41,9 +41,15 @@ public class SeleccionDao {
                 estadio.setNombre(rs.getString("nombre"));
                 seleccion.setEstadio(estadio);
 
+                seleccion.setPrimerPartido(rs.getString(5));
+
                 listaSelecciones.add(seleccion);
             }
         }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listaSelecciones;
     }
 
 }
