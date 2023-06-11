@@ -1,5 +1,7 @@
 package Servlet;
 
+import Beans.Jugador;
+import Beans.Seleccion;
 import Daos.JugadorDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -30,7 +32,6 @@ public class MainServlet extends HttpServlet {
                 break;
 
             case "agregar":
-                //request.setAttribute("listaJugadores", JugadorDao.listarJugadores());
                 view = request.getRequestDispatcher("agregarJugador.jsp");
                 view.forward(request, response);
                 break;
@@ -39,16 +40,38 @@ public class MainServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
+        String action = request.getParameter("action") == null ? "listar" : request.getParameter("action");
 
         JugadorDao jugadorDao = new JugadorDao();
         //Jugador jugador = setJugadorData(request);
 
         switch (action) {
             case "guardar":
-                //jugadorDao.crearJugador(jugador);
+                Jugador jugador = new Jugador();
+                String nombre = request.getParameter("nombre_jugador");
 
-                response.sendRedirect("MainServlet");
+                jugador.setNombre(nombre);
+                jugador.setEdad(Integer.parseInt(request.getParameter("edad")));
+                jugador.setPosicion(request.getParameter("posicion"));
+                jugador.setClub(request.getParameter("club"));
+
+                Seleccion seleccion = new Seleccion();
+                seleccion.setNombre("nombre_seleccion");
+                /*Dejo este espacio por si falta rellenar!!*/
+                jugador.setSeleccion(seleccion);
+
+
+
+                Jugador Jugador = jugadorDao.obtenerJugador(nombre);
+                if(Jugador == null){
+                    jugadorDao.crearJugador(jugador);
+                    response.sendRedirect(request.getContextPath() + "/mainservlet");
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/mainservlet?action=agregar");
+
+                }
+
+
                 break;
         }
     }
