@@ -12,36 +12,39 @@ public class SeleccionDao extends BaseDao{
     public ArrayList<Seleccion> listarSelecciones() {
         ArrayList<Seleccion> listaSelecciones = new ArrayList<>();
 
-        try (Connection conn = this.getConnection();
+        try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT *" +
-                     "FROM (" +
-                     "    SELECT s.idSeleccion, s.nombre, s.tecnico, e.nombre AS estadio, MIN(p.fecha) AS fecha," +
-                     "           CONCAT(sl.nombre, ' vs ', sv.nombre) AS primer_partido," +
-                     "           ROW_NUMBER() OVER (PARTITION BY s.idSeleccion ORDER BY MIN(p.fecha)) AS row_num" +
-                     "    FROM seleccion s" +
-                     "    INNER JOIN estadio e ON s.estadio_idEstadio = e.idEstadio" +
-                     "    LEFT JOIN partido p ON s.idSeleccion = p.seleccionLocal OR s.idSeleccion = p.seleccionVisitante" +
-                     "    LEFT JOIN seleccion sl ON p.seleccionLocal = sl.idSeleccion" +
-                     "    LEFT JOIN seleccion sv ON p.seleccionVisitante = sv.idSeleccion" +
-                     "    GROUP BY s.idSeleccion, s.nombre, s.tecnico, e.nombre, primer_partido" +
-                     ") AS subquery" +
-                     "WHERE row_num = 1" +
-                     "ORDER BY fecha");) {
+             ResultSet rs = stmt.executeQuery("SELECT idSeleccion, nombre, tecnico, estadio, fecha, primer_partido\n" +
+                     "FROM (\n" +
+                     "    SELECT s.idSeleccion, s.nombre, s.tecnico, e.nombre AS estadio, MIN(p.fecha) AS fecha,\n" +
+                     "           CONCAT(sl.nombre, ' vs ', sv.nombre) AS primer_partido,\n" +
+                     "           ROW_NUMBER() OVER (PARTITION BY s.idSeleccion ORDER BY MIN(p.fecha)) AS row_num\n" +
+                     "    FROM seleccion s\n" +
+                     "    INNER JOIN estadio e ON s.estadio_idEstadio = e.idEstadio\n" +
+                     "    LEFT JOIN partido p ON s.idSeleccion = p.seleccionLocal OR s.idSeleccion = p.seleccionVisitante\n" +
+                     "    LEFT JOIN seleccion sl ON p.seleccionLocal = sl.idSeleccion\n" +
+                     "    LEFT JOIN seleccion sv ON p.seleccionVisitante = sv.idSeleccion\n" +
+                     "    GROUP BY s.idSeleccion, s.nombre, s.tecnico, e.nombre, primer_partido\n" +
+                     ") AS subquery\n" +
+                     "WHERE row_num = 1\n" +
+                     "ORDER BY idSeleccion;");) {
 
             while (rs.next()) {
-                Seleccion seleccion = new Seleccion();
+                //Seleccion seleccion = new Seleccion();
+                Seleccion seleccion = fetchSeleccionData(rs);
 
+                /*
                 seleccion.setIdSeleccion(rs.getInt(1));
                 seleccion.setNombre(rs.getString(2));
                 seleccion.setTecnico(rs.getString(3));
 
                 Estadio estadio = new Estadio();
-                estadio.setIdEstadio(rs.getInt("e.idEstadio"));
+                //estadio.setIdEstadio(rs.getInt("e.idEstadio"));
                 estadio.setNombre(rs.getString("nombre"));
                 seleccion.setEstadio(estadio);
 
                 seleccion.setPrimerPartido(rs.getString(5));
+                */
 
                 listaSelecciones.add(seleccion);
             }
@@ -50,6 +53,35 @@ public class SeleccionDao extends BaseDao{
             ex.printStackTrace();
         }
         return listaSelecciones;
+    }
+
+    public void borrar (int idSeleccion) {
+        String sql = "delete from seleccion where idSeleccion = ?";
+        try (Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idSeleccion);
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    private Seleccion fetchSeleccionData(ResultSet rs) throws  SQLException {
+        Seleccion seleccion = new Seleccion();
+        seleccion.setIdSeleccion(rs.getInt(1));
+        seleccion.setNombre(rs.getString(2));
+        seleccion.setTecnico(rs.getString(3));
+
+        Estadio estadio = new Estadio();
+        //estadio.setIdEstadio(rs.getInt("e.idEstadio"));
+        estadio.setNombre(rs.getString(4));
+        seleccion.setEstadio(estadio);
+
+        seleccion.setPrimerPartido(rs.getString(6));
+
+        return seleccion;
     }
 
 }

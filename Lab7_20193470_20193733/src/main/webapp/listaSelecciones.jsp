@@ -17,7 +17,7 @@
         <table>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
+                <th>Nombre de selección</th>
                 <th>Técnico</th>
                 <th>Estadio</th>
                 <th>Primer Partido</th>
@@ -27,12 +27,17 @@
                 <td><%= seleccion.getIdSeleccion() %></td>
                 <td><%= seleccion.getNombre() %></td>
                 <td><%= seleccion.getTecnico() %></td>
-                <td><%= seleccion.getEstadio() %></td>
+                <td><%= seleccion.getEstadio().getNombre() %></td>
                 <td><%= seleccion.getPrimerPartido() %></td>
+                <td>
+                    <a class="btn btn-warning" href="<%=request.getContextPath()%>/SeleccionServlet?l=borrar&id=<%=seleccion.getIdSeleccion()%>" >Borrar</a>
+                    <!--<button type="button" class="btn btn-warning">Warning</button>-->
+                </td>
             </tr>
             <%
                 }
             %>
+            <a href="<%= request.getContextPath()%>/SeleccionServlet?l=agregar" class="btn btn-primary mb-4">Agregar nueva selección</a>
         </table>
     </body>
 </html>
