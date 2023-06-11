@@ -3,6 +3,7 @@ package Servlet;
 import Beans.Jugador;
 import Beans.Seleccion;
 import Daos.JugadorDao;
+import Daos.SeleccionDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,6 +22,7 @@ public class MainServlet extends HttpServlet {
 
         RequestDispatcher view;
         JugadorDao jugadorDao = new JugadorDao();
+        SeleccionDao seleccionDao = new SeleccionDao();
         //no se xq no sale el dao
         //SeleccionDao seleccionDao = new SeleccionDao();
 
@@ -32,8 +34,14 @@ public class MainServlet extends HttpServlet {
                 break;
 
             case "agregar":
+                request.setAttribute("listaSelecciones", seleccionDao.obtenerListaSelecciones());
                 view = request.getRequestDispatcher("agregarJugador.jsp");
                 view.forward(request, response);
+                break;
+
+            case "info":
+                view = request.getRequestDispatcher("/mas_info.jsp");
+                view.forward(request,response);
                 break;
         }
     }
@@ -56,7 +64,7 @@ public class MainServlet extends HttpServlet {
                 jugador.setClub(request.getParameter("club"));
 
                 Seleccion seleccion = new Seleccion();
-                seleccion.setNombre("nombre_seleccion");
+                seleccion.setIdSeleccion(Integer.parseInt(request.getParameter("listaSelecciones")));
                 /*Dejo este espacio por si falta rellenar!!*/
                 jugador.setSeleccion(seleccion);
 

@@ -36,7 +36,7 @@
                     <ul class="nav">
                         <li><a class="<%=request.getParameter("page").equals("jugadores")? "active": "" %>" href="<%=request.getContextPath()%>/mainservlet">Jugadores</a></li>
                         <li><a class="<%=request.getParameter("page").equals("selecciones")? "active": "" %>" href="<%=request.getContextPath()%>/SeleccionServlet">Selecciones</a></li>
-                        <li><a class="<%=request.getParameter("page").equals("info")? "active": "" %>" href="<%=request.getContextPath()%>/mainservlet?action=propuestos">Más información</a></li>
+                        <li><a class="<%=request.getParameter("page").equals("info")? "active": "" %>" href="<%=request.getContextPath()%>/mainservlet?action=info">Más información</a></li>
                     </ul>
                     <!-- Se añadirá el menú de desplazamiento luego
                     <a class='menu-trigger'>

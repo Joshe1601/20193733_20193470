@@ -14,7 +14,7 @@ public class JugadorDao extends BaseDao{
 
         ArrayList<Jugador> listaJugadores = new ArrayList<>();
 
-        String sql = "SELECT * FROM jugador j LEFT JOIN seleccion s ON (j.sn_idSeleccion = s.idSeleccion)";
+        String sql = "SELECT * FROM jugador LEFT JOIN seleccion ON jugador.sn_idSeleccion = seleccion.idSeleccion";
 
         //no entiendo bien xq getConnection
         //Tranquila ya lo arreglé :)
@@ -32,9 +32,9 @@ public class JugadorDao extends BaseDao{
                 jugador.setClub(rs.getString(5));
 
                 Seleccion seleccion = new Seleccion();
-                seleccion.setIdSeleccion(rs.getInt("s.idSeleccion"));
-                seleccion.setNombre(rs.getString("nombre"));
-                seleccion.setTecnico(rs.getString("tecnico"));
+                seleccion.setIdSeleccion(rs.getInt("seleccion.idSeleccion"));
+                seleccion.setNombre(rs.getString("seleccion.nombre"));
+                seleccion.setTecnico(rs.getString("seleccion.tecnico"));
                 jugador.setSeleccion(seleccion);
 
                 listaJugadores.add(jugador);
@@ -51,13 +51,13 @@ public class JugadorDao extends BaseDao{
 
         Jugador jugador = null;
 
-        String sql = "SELECT * FROM jugador j LEFT JOIN seleccion s ON (j.sn_idSeleccion = s.idSeleccion)";
+        String sql = "SELECT * FROM jugador LEFT JOIN seleccion ON jugador.sn_idSeleccion = seleccion.idSeleccion WHERE jugador.nombre = ?";
 
         try (Connection conn = this.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-            pstmt.setString(2, nombre);
+            pstmt.setString(1, nombre);
+            ResultSet rs = pstmt.executeQuery();
 
             if(rs.next()){
                 jugador = new Jugador();
@@ -68,9 +68,9 @@ public class JugadorDao extends BaseDao{
                 jugador.setClub(rs.getString(5));
 
                 Seleccion seleccion = new Seleccion();
-                seleccion.setIdSeleccion(rs.getInt("s.idSeleccion"));
-                seleccion.setNombre(rs.getString("nombre"));
-                seleccion.setTecnico(rs.getString("tecnico"));
+                seleccion.setIdSeleccion(rs.getInt("seleccion.idSeleccion"));
+                seleccion.setNombre(rs.getString("seleccion.nombre"));
+                seleccion.setTecnico(rs.getString("seleccion.tecnico"));
                 jugador.setSeleccion(seleccion);
 
             }
@@ -86,7 +86,7 @@ public class JugadorDao extends BaseDao{
 
     public void crearJugador(Jugador jugador) {
 
-        String sql = "INSERT INTO jugador (nombre, edad, posicion, club, sn_idSelecciom) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO jugador (nombre, edad, posicion, club, sn_idSeleccion)"+" VALUES (?,?,?,?,?);";
         //de nuevo no entiendo bien el getConnection
         //OKI arreglado :)
 

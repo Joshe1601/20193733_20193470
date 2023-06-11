@@ -11,9 +11,17 @@
         <jsp:param name="page" value="jugadores"/>
     </jsp:include>
     <!-- ***** Header Area End ***** -->
-    <jsp:include page="/includes/background.jsp">
-        <jsp:param name="bgr_text" value="Jugadores"/>
-    </jsp:include>
+
+    <!-- ***** Background Area Start ***** -->
+    <section id="infinite">
+        <div class="img-container">
+            <h2 class="img-title">Clasificatorias Sudamericanas Mundial 2026</h2>
+            <p class="img-subtitle">
+                Lista de jugadores disponibles:
+            </p>
+        </div>
+    </section>
+    <!-- ***** Background Area End ***** -->
 
 
     <div class="pt-4">
