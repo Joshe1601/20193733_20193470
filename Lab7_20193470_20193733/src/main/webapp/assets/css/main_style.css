@@ -18,7 +18,9 @@ nav a{
 
 .bgr-body{
     padding: 0 60px 0 60px;
-    background-color: grey
+    background-image: url(../images/fifalogo.jpg);
+    background-size: 185px;
+    background-repeat: repeat;
 }
 
 .company-logo--vertical-separator {
@@ -148,6 +150,16 @@ nav a{
 .tabla{
     margin-bottom: 10px;
     margin-top: 10px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.tabla table {
+    width: 100%;
+    table-layout: fixed;
+}
+.tabla th, .tabla td {
+    width: auto;
 }
 
 #infinite {
