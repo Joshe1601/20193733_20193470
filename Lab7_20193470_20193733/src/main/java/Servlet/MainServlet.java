@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "JugadorServlet", urlPatterns = {"/JugadorServlet"})
-public class JugadorServlet extends HttpServlet {
+@WebServlet(name = "MainServlet", urlPatterns = {"/mainservlet"})
+public class MainServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -48,7 +48,7 @@ public class JugadorServlet extends HttpServlet {
             case "guardar":
                 //jugadorDao.crearJugador(jugador);
 
-                response.sendRedirect("JugadorServlet");
+                response.sendRedirect("MainServlet");
                 break;
         }
     }
