@@ -28,7 +28,7 @@
                 <div class = "row">
                     <div class="form-group">
                         <h5>Ingrese nombre del jugador:</h5>
-                        <input type="text" class="form-control" aria-label="nombre_jugador" id="nombre" name="nombre" required>
+                        <input type="text" class="form-control" aria-label="nombre_jugador" id="nombre_jugador" name="nombre_jugador" required>
                     </div>
 
                     <div class="form-group">
@@ -46,7 +46,31 @@
                                 <input type="text" id="club" name="club" aria-label="club" class="form-control" required>
                             </div>
                         </div>
-                        
+
+                        <div class="row">
+                            <div class="col">
+                                <h5>Consola:</h5>
+                                <select class="form-control" aria-label="consola" id="consola" name="consola" required>
+                                    <option disabled selected>Selecciona una consola</option>
+                                    <option>PlayStation</option>
+                                    <option>Xbox</option>
+                                    <option>Nintendo</option>
+                                    <option>PC</option>
+                                </select>
+                            </div>
+
+                            <div class="col">
+                                <h5>Género:</h5>
+                                <select class="form-control" aria-label="genero" id="genero" name="genero" required>
+                                    <option disabled selected>Selecciona un género</option>
+                                    <option>Acción</option>
+                                    <option>Aventura</option>
+                                    <option>Deporte</option>
+                                    <option>Estrategia</option>
+                                    <option>Rol</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
