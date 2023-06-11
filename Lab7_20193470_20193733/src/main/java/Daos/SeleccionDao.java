@@ -56,7 +56,7 @@ public class SeleccionDao extends BaseDao{
     }
 
     public void borrar (int idSeleccion) {
-        String sql = "delete from seleccion where idSeleccion = ?";
+        String sql = "delete from seleccion where (idSeleccion = ?)";
         try (Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -66,6 +66,25 @@ public class SeleccionDao extends BaseDao{
         catch (SQLException ex){
             ex.printStackTrace();
         }
+    }
+
+    public void anadir (Seleccion seleccion) {
+        String sql = "insert into seleccion (nombre, tecnico, estadio_idEstadio) values (?, ?, ?)";
+
+        try (Connection conn = getConnection();
+        PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            setSeleccionData(seleccion, pstmt);
+            pstmt.executeUpdate();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public Seleccion mostrar(int idSeleccion) {
+        Seleccion seleccion = null;
+        //llenar
+        return seleccion;
     }
 
     private Seleccion fetchSeleccionData(ResultSet rs) throws  SQLException {
@@ -82,6 +101,12 @@ public class SeleccionDao extends BaseDao{
         seleccion.setPrimerPartido(rs.getString(6));
 
         return seleccion;
+    }
+
+    private void setSeleccionData(Seleccion seleccion, PreparedStatement pstmt) throws SQLException {
+        pstmt.setString(1, seleccion.getNombre());
+        pstmt.setString(2, seleccion.getTecnico());
+        pstmt.setInt(3, seleccion.getIdSeleccion());
     }
 
 }

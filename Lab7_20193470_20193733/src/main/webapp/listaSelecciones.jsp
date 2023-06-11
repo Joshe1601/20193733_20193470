@@ -32,7 +32,7 @@
     <div class="pt-4">
         <div class="row">
             <div class="col-lg-12 d-flex justify-content-end" >
-                <a id="ocultar" class="btn btn-warning" href="<%=request.getContextPath()%>/SeleccionServlet?action=agregar">Agregar nueva selección</a>
+                <!--<a id="ocultar" class="btn btn-warning" href="<%=request.getContextPath()%>/SeleccionServlet?action=agregar">Agregar nueva selección</a>-->
             </div>
         </div>
     </div>
@@ -57,7 +57,11 @@
                 <td><%= seleccion.getEstadio().getNombre() %></td>
                 <td><%= seleccion.getPrimerPartido() %></td>
                 <td>
-                    <a class="btn btn-warning" href="<%=request.getContextPath()%>/SeleccionServlet?l=borrar&id=<%=seleccion.getIdSeleccion()%>" >Borrar</a>
+                    <!--<a class="btn btn-warning" href="<%=request.getContextPath()%>/SeleccionServlet?l=borrar&id=<%=seleccion.getIdSeleccion()%>" >Borrar</a>-->
+                    <a class="btn btn-danger"
+                       href="<%=request.getContextPath()%>/SeleccionServlet?l=borrar&id=<%=seleccion.getIdSeleccion()%>">
+                        <i class="bi bi-trash3"></i>
+                    </a>
                     <!--<button type="button" class="btn btn-warning">Warning</button>-->
                 </td>
             </tr>

@@ -23,8 +23,6 @@ public class MainServlet extends HttpServlet {
         RequestDispatcher view;
         JugadorDao jugadorDao = new JugadorDao();
         SeleccionDao seleccionDao = new SeleccionDao();
-        //no se xq no sale el dao
-        //SeleccionDao seleccionDao = new SeleccionDao();
 
         switch (action) {
             case "listar":
@@ -34,7 +32,7 @@ public class MainServlet extends HttpServlet {
                 break;
 
             case "agregar":
-                request.setAttribute("listaSelecciones", seleccionDao.obtenerListaSelecciones());
+                request.setAttribute("listaSelecciones", seleccionDao.listarSelecciones());
                 view = request.getRequestDispatcher("agregarJugador.jsp");
                 view.forward(request, response);
                 break;
