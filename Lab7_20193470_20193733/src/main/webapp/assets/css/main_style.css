@@ -17,8 +17,8 @@ nav a{
 }
 
 .bgr-body{
-    padding: 0 60px 0 60px;
-    background-image: url(../images/fifalogo.jpg);
+    /*padding: 0 60px 0 60px;*/
+    /*background-image: url(../images/fifalogo.jpg);*/
     background-size: 185px;
     background-repeat: repeat;
 }
@@ -160,6 +160,13 @@ nav a{
 }
 .tabla th, .tabla td {
     width: auto;
+}
+
+.tabla tr {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 #infinite {

@@ -6,7 +6,7 @@ public class Jugador {
     private int edad;
     private String posicion;
     private String club;
-    private Seleccion nombre_seleccion;
+    private Seleccion seleccion;
 
     public int getIdJugador() {
         return idJugador;
@@ -48,12 +48,14 @@ public class Jugador {
         this.club = club;
     }
 
-
-    public Seleccion getNombre_seleccion() {
-        return nombre_seleccion;
+    public Seleccion getSeleccion() {
+        return seleccion;
     }
 
-    public void setNombre_seleccion(Seleccion nombre_seleccion) {
-        this.nombre_seleccion = nombre_seleccion;
+    public void setSeleccion(Seleccion seleccion) {
+        this.seleccion = seleccion;
     }
 }
+
+
+

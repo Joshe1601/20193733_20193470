@@ -1,28 +1,44 @@
 package Daos;
 
+import Beans.Estadio;
 import Beans.Jugador;
+import Beans.Seleccion;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class JugadorDao {
+public class JugadorDao extends BaseDao{
     public ArrayList<Jugador> listarJugadores() {
 
         ArrayList<Jugador> listaJugadores = new ArrayList<>();
 
-        String sql = "SELECT j.idJugador as 'ID', j.nombre, j.edad, j.posicion, j.club, s.nombre as 'nombre de seleccion' FROM jugador j JOIN seleccion s ON (j.sn_idSeleccion = s.idSeleccion)";
+        String sql = "SELECT * FROM jugador j LEFT JOIN seleccion s ON (j.sn_idSeleccion = s.idSeleccion)";
 
         //no entiendo bien xq getConnection
-        String url = "jdbc:mysql://localhost:3306/mydb";
-        try (Connection conn = DriverManager.getConnection(url, "root", "root");
+        //Tranquila ya lo arreglé :)
+
+        try (Connection conn = this.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                //Jugador jugador = fetchJugadorData(rs);
-                //listaJugadores.add(jugador);
+                Jugador jugador = new Jugador();
+                jugador.setIdJugador(rs.getInt(1));
+                jugador.setNombre(rs.getString(2));
+                jugador.setEdad(rs.getInt(3));
+                jugador.setPosicion(rs.getString(4));
+                jugador.setClub(rs.getString(5));
+
+                Seleccion seleccion = new Seleccion();
+                seleccion.setIdSeleccion(rs.getInt("s.idSeleccion"));
+                seleccion.setNombre(rs.getString("nombre"));
+                seleccion.setTecnico(rs.getString("tecnico"));
+                jugador.setSeleccion(seleccion);
+
+                listaJugadores.add(jugador);
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -35,9 +51,9 @@ public class JugadorDao {
 
         String sql = "INSERT INTO jugador (nombre, edad, posicion, club, sn_idSelecciom) VALUES (?,?,?,?,?)";
         //de nuevo no entiendo bien el getConnection
-        //Connection conn = getConnection();
-        String url = "jdbc:mysql://localhost:3306/mydb";
-        try (Connection conn = DriverManager.getConnection(url, "root", "root");
+        //OKI arreglado :)
+
+        try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             //setJugadorData(jugador, pstmt);
