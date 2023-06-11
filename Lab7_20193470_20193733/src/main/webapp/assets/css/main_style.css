@@ -1,5 +1,6 @@
 header {
     background-color: #202085;
+
 }
 
 nav li{
@@ -13,6 +14,11 @@ nav a{
     font-weight: bold;
     font-size: 15px;
     text-decoration: none;
+}
+
+.bgr-body{
+    padding: 0 60px 0 60px;
+    background-color: grey
 }
 
 .company-logo--vertical-separator {
@@ -139,31 +145,57 @@ nav a{
     box-sizing: border-box;
 }
 
+.tabla{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 #infinite {
     background-color: #222;
-    background-image: url(../images/conmebol_eliminatorias.jpg);
+    background-image: url(../images/mexico-usa-canada.jpg);
     background-repeat: no-repeat;
-    background-size: cover; /* La imagen se ajusta para cubrir toda la sección */
-    background-position: center; /* La imagen se posiciona en el centro */
-    height: 76vh;
-    min-height: 375px;
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+    min-height: 300px;
     position: relative;
 }
 
-#infinite .tm-hero-text-container {
+#infinite .img-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: white;
 }
 
-#infinite .tm-hero-title {
+#infinite .img-title {
     font-size: 40px;
     margin-bottom: 20px;
+    color: white;
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black;
+
+
 }
 
-#infinite .tm-hero-subtitle {
+#infinite .img-subtitle {
     font-size: 24px;
+    color: white;
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black;
+
+}
+
+footer {
+    background-color: #202085;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100px;
+}
+
+footer p {
+    text-align: center;
+    line-height: 60px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
 }
